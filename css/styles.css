@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica;
+}
+
+body {
+    background-color: #202124;
+}
+
+header {
+    border-bottom: 1px solid #ccc;
+    padding: 1rem 2rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+#search-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#search-input {
+    background-color: #525356;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    color: #ddd;
+    width: 400px;
+}
+
+#search-input::placeholder {
+    color: #ddd;
+}
+
+#export-notes {
+    background-color: #333;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#export-notes:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+#add-note-container {
+    display: flex;
+    width: 400px;
+    margin: 1rem auto 0;
+    gap: 1rem;
+}
+
+#add-note-container input,
+#add-note-container button {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#add-note-container input {
+    flex: 1;
+    background-color: transparent;
+    border: 1px solid #525356;
+    color: #fff;
+}
+
+#add-note-container input::placeholder {
+    color: #fff;
+}
+
+#add-note-container button {
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #525356;
+}
