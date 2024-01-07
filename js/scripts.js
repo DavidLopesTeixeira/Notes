@@ -13,11 +13,11 @@ function showNotes() {
 
     notesContainer.appendChild(noteElement);
   });
-};
+}
 
 function cleanNotes() {
   notesContainer.replaceChildren([]);
-};
+}
 
 function addNote() {
   const notes = getNotes();
@@ -39,11 +39,11 @@ function addNote() {
   saveNotes(notes);
 
   noteInput.value = "";
-};
+}
 
 function generateId() {
   return Math.floor(Math.random() * 5000);
-};
+}
 
 function createNode(id, content, fixed) {
   const element = document.createElement("div");
@@ -60,7 +60,7 @@ function createNode(id, content, fixed) {
   element.appendChild(pinIcon);
 
   const deleteIcon = document.createElement("i");
-  
+
   deleteIcon.classList.add(...["bi", "bi-x-lg"]);
 
   element.appendChild(deleteIcon);
@@ -73,7 +73,7 @@ function createNode(id, content, fixed) {
 
   if (fixed) {
     element.classList.add("fixed");
-  };
+  }
 
   // Eventos do elemento
 
@@ -85,12 +85,14 @@ function createNode(id, content, fixed) {
     deleteNode(id, element);
   });
 
-  element.querySelector(".bi-file-earmark-plus").addEventListener("click", () => {
-    copyNote(id);
-  });
+  element
+    .querySelector(".bi-file-earmark-plus")
+    .addEventListener("click", () => {
+      copyNote(id);
+    });
 
   return element;
-};
+}
 
 function toggleFixNote(id) {
   const notes = getNotes();
@@ -101,34 +103,38 @@ function toggleFixNote(id) {
 
   saveNotes(notes);
   showNotes();
-};
+}
 
 function deleteNode(id, element) {
-    const notes = getNotes().filter((note) => note.id !== id);
+  const notes = getNotes().filter((note) => note.id !== id);
 
-    saveNotes(notes);
+  saveNotes(notes);
 
-    notesContainer.removeChild(element);
-};
+  notesContainer.removeChild(element);
+}
 
-function copyNote (id) {
-    const notes = getNotes();
+function copyNote(id) {
+  const notes = getNotes();
 
-    const targetNotes = notes.filter((note) => note.id === id)[0];
+  const targetNotes = notes.filter((note) => note.id === id)[0];
 
-    const noteObject = {
-        id: generateId(),
-        content: targetNotes.content,
-        fixed: false,
-    };
+  const noteObject = {
+    id: generateId(),
+    content: targetNotes.content,
+    fixed: false,
+  };
 
-    const noteElement = createNode(noteObject.id, noteObject.content, noteObject.fixed);
+  const noteElement = createNode(
+    noteObject.id,
+    noteObject.content,
+    noteObject.fixed
+  );
 
-    notesContainer.appendChild(noteElement);
+  notesContainer.appendChild(noteElement);
 
-    notes.push(noteObject);
+  notes.push(noteObject);
 
-    saveNotes(notes);
+  saveNotes(notes);
 }
 
 // LocalStorage
@@ -139,11 +145,11 @@ function getNotes() {
   const orderedNotes = notes.sort((a, b) => (a.fixed > b.fixed ? -1 : 1));
 
   return orderedNotes;
-};
+}
 
 function saveNotes(notes) {
   localStorage.setItem("notes", JSON.stringify(notes));
-};
+}
 
 // Eventos
 addNoteBtn.addEventListener("click", () => addNote());
