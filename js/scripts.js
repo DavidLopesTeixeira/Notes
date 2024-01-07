@@ -77,6 +77,13 @@ function createNode(id, content, fixed) {
 
   // Eventos do elemento
 
+  element.querySelector("textarea").addEventListener("keyup", (e) => {
+
+        const nodeContent = e.target.value;
+
+        updateNote(id, nodeContent);
+  })
+
   element.querySelector(".bi-pin").addEventListener("click", () => {
     toggleFixNote(id);
   });
@@ -135,6 +142,16 @@ function copyNote(id) {
   notes.push(noteObject);
 
   saveNotes(notes);
+}
+
+function updateNote(id, newContent) {
+    const notes = getNotes()
+
+    const targetNotes = notes.filter((note) => note.id === id)[0];
+    
+    targetNotes.content = newContent;
+
+    saveNotes(notes);
 }
 
 // LocalStorage
