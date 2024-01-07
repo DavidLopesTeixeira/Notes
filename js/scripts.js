@@ -6,12 +6,18 @@ const addNoteBtn = document.querySelector(".add-note");
 // Funções
 
 function showNotes() {
+  cleanNotes();
+
   getNotes().forEach((note) => {
     const noteElement = createNode(note.id, note.content, note.fixed);
 
     notesContainer.appendChild(noteElement);
   });
-}
+};
+
+function cleanNotes() {
+  notesContainer.replaceChildren([]);
+};
 
 function addNote() {
   const notes = getNotes();
@@ -33,11 +39,11 @@ function addNote() {
   saveNotes(notes);
 
   noteInput.value = "";
-}
+};
 
 function generateId() {
   return Math.floor(Math.random() * 5000);
-}
+};
 
 function createNode(id, content, fixed) {
   const element = document.createElement("div");
@@ -55,7 +61,7 @@ function createNode(id, content, fixed) {
 
   if (fixed) {
     element.classList.add("fixed");
-  }
+  };
 
   // Eventos do elemento
 
@@ -64,7 +70,7 @@ function createNode(id, content, fixed) {
   });
 
   return element;
-}
+};
 
 function toggleFixNote(id) {
   const notes = getNotes();
@@ -74,19 +80,22 @@ function toggleFixNote(id) {
   targetNotes.fixed = !targetNotes.fixed;
 
   saveNotes(notes);
-}
+  showNotes();
+};
 
 // LocalStorage
 
 function getNotes() {
   const notes = JSON.parse(localStorage.getItem("notes") || "[]");
 
-  return notes;
-}
+  const orderedNotes = notes.sort((a, b) => (a.fixed > b.fixed ? -1 : 1));
+
+  return orderedNotes;
+};
 
 function saveNotes(notes) {
   localStorage.setItem("notes", JSON.stringify(notes));
-}
+};
 
 // Eventos
 addNoteBtn.addEventListener("click", () => addNote());
