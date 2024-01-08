@@ -16,7 +16,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    
+
 }
 
 #search-container {
@@ -52,6 +52,7 @@ header {
 #export-notes:hover {
     background-color: #fff;
     color: #333;
+    transform: scale(1.1);
 }
 
 #add-note-container {
@@ -83,6 +84,13 @@ header {
     background-color: #333;
     color: #fff;
     border: 1px solid #525356;
+    transition: 0.5s;
+}
+
+#add-note-container button:hover {
+    transform: scale(1.1);
+    border: 1px solid #525356;
+
 }
 
 #notes-container {
@@ -122,7 +130,7 @@ header {
     border-radius: 3px;
 }
 
-.note:hover > i {
+.note:hover>i {
     opacity: 1;
 }
 
@@ -146,8 +154,35 @@ header {
 .note .bi-x-lg:hover,
 .note .bi-file-earmark-plus:hover {
     color: #fff;
-} 
+}
 
 .note.fixed {
     background-color: #3c3c3f;
+    border: 1px solid #bff7cb;
+}
+
+@media(max-width: 450px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    #search-container {
+        width: 100%;
+    }
+
+    #search-input {
+        width: 100%;
+    }
+
+    #add-note-container {
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+
+    #notes-container {
+        grid-template-columns: repeat(auto-fill, 100%);
+    }
 }
