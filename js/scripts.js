@@ -188,28 +188,24 @@ function searchNotes(search) {
 }
 
 function exportData() {
+  const notes = getNotes();
 
-    const notes = getNotes()
-
-    const csvString = [
-        ["ID", "Conteúdo", "Fixado?"],
-        ...notes.map((note) => [note.id, note.content, note.fixed]),
-    ]
+  const csvString = [
+    ["ID", "Conteúdo", "Fixado?"],
+    ...notes.map((note) => [note.id, note.content, note.fixed]),
+  ]
     .map((e) => e.join(","))
     .join("\n");
 
-    const element = document.createElement("a");
+  const element = document.createElement("a");
 
-    element.href = "data:text/csv;charset=utf-8," + encodeURI(csvString);
+  element.href = "data:text/csv;charset=utf-8," + encodeURI(csvString);
 
-    element.target = "_blank"
+  element.target = "_blank";
 
-    
-    element.download = "notes.csv";
+  element.download = "notes.csv";
 
-    element.click();
-
-    
+  element.click();
 }
 
 // Eventos
@@ -228,7 +224,7 @@ noteInput.addEventListener("keydown", (e) => {
 });
 
 exportBtn.addEventListener("click", () => {
-    exportData()
-})
+  exportData();
+});
 // Start da aplicação
 showNotes();
